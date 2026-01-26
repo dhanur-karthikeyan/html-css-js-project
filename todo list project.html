@@ -1,0 +1,19 @@
+<input type="text" placeholder="Enter a event" id="int">
+<button onclick="add()">Add</button>
+<ul id="li">
+    <li>Hello
+    <button onclick="del(event)">remove</button>
+    </li>
+</ul>
+<script>
+     a=document.getElementById("li")
+     d=document.getElementById("int")
+    function add(){
+        b=document.createElement("li")
+        b.innerHTML=d.value + `<button onclick="del(event)">remove</button>`
+        a.append(b)
+    }
+    function del(event){
+        event.target.parentElement.remove(li)
+    }
+</script>
