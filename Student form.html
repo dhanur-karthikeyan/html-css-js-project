@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Form</title>
+</head>
+
+<body style="margin-left:550px; margin-top:100px;">
+
+<h1>STUDENT FORM</h1>
+
+<form id="studentForm" onsubmit="return addStudent();">
+
+<table border="1" cellpadding="8">
+  <tr>
+    <td><b>Name</b></td>
+    <td>
+      <input type="text" id="name" placeholder="Enter your name" required>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Age</b></td>
+    <td>
+      <input type="number" id="age" placeholder="Enter your age" required>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Gender</b></td>
+    <td>
+      <input type="radio" name="gender" value="Male" required> Male
+      <input type="radio" name="gender" value="Female"> Female
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Course</b></td>
+    <td>
+      <select id="course" required>
+        <option value="">Select course</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Python">Python</option>
+        <option value="MongoDB">MongoDB</option>
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Email</b></td>
+    <td>
+      <input type="email" id="email" placeholder="Enter your email" required>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" style="text-align:center;">
+      <button type="submit" style="background:aqua; width:100%;">
+        Save
+      </button>
+    </td>
+  </tr>
+</table>
+
+</form>
+
+<br><br>
+
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Course</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody id="detail"></tbody>
+</table>
+
+<script>
+function addStudent() {
+  const form = document.getElementById("studentForm");
+
+  // Stop if required fields are missing
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return false;
+  }
+
+  const name = document.getElementById("name").value;
+  const age = document.getElementById("age").value;
+  const course = document.getElementById("course").value;
+  const email = document.getElementById("email").value;
+  const gender = document.querySelector('input[name="gender"]:checked').value;
+
+  const tbody = document.getElementById("detail");
+  const row = document.createElement("tr");
+
+  row.innerHTML = `
+    <td>${name}</td>
+    <td>${age}</td>
+    <td>${gender}</td>
+    <td>${course}</td>
+    <td>${email}</td>
+    <td>
+      <button onclick="deleteRow(this)" style="background:red; color:white;">
+        Delete
+      </button>
+    </td>
+  `;
+
+  tbody.appendChild(row);
+  form.reset();   
+  return false;   
+}
+
+function deleteRow(btn) {
+  btn.closest("tr").remove();
+}
+</script>
+
+</body>
+</html>
